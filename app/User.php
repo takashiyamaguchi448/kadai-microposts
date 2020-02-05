@@ -90,7 +90,7 @@ class User extends Authenticatable
     
     public function favorites()
     {
-        return $this->hasMany(Micropost::class);
+        return $this->belongsToMany(Micropost::class);
     }
     
     public function favorite($userId)
