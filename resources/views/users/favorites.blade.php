@@ -11,7 +11,6 @@
             @if (count($microposts) > 0)
                 @include('microposts.microposts', ['microposts' => $microposts])
             @endif
-            @include('favorites.favorite_button', ['microposts' => $microposts])
         </div>
     </div>
 @endsection
