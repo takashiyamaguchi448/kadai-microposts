@@ -98,9 +98,9 @@ class User extends Authenticatable
         // 既にお気に入りにしているかの確認
         $exist = $this->is_favorite($micropostId);
         // 相手が自分自身ではないかの確認
-        $its_me = $this->id == $micropostId;
+        //$its_me = $this->id == $micropostId;
     
-        if ($exist || $its_me) {
+        if ($exist) {
             // 既にお気に入りにしていれば何もしない
             return false;
         } else {
@@ -115,9 +115,9 @@ class User extends Authenticatable
         // 既にお気に入りにしているかの確認
         $exist = $this->is_favorite($micropostId);
         // 相手が自分自身ではないかの確認
-        $its_me = $this->id == $micropostId;
+        //$its_me = $this->id == $micropostId;
     
-        if ($exist && !$its_me) {
+        if ($exist) {
             // 既にお気に入りにしていれば外す
             $this->favorites()->detach($micropostId);
             return true;
@@ -132,10 +132,14 @@ class User extends Authenticatable
         return $this->favorites()->where('micropost_id',$micropostId)->exists();
     }
     
-    public function feed_favorites()
-    {
-        $follow_user_ids = $this->followings()->pluck('users.id')->toArray();
-        $follow_user_ids[] = $this->id;
-        return Micropost::whereIn('user_id', $follow_user_ids);
-    }
+    //favorites()自体で、お気に入りの投稿を取れるため feed_favorites() は不要
+    //public function feed_favorites()
+    //{
+        //ユーザーがお気に入りにしているマイクロポストのIDを取得する
+        //$favorite_micropost_ids = $this->favorites()->pluck('microposts.id')->toArray();
+        //自分自身の投稿をフィールドに入れる
+        //$follow_user_ids[] = $this->id;
+        //ユーザーがお気に入りにしているマイクロソフトIDのすべてを取得
+        //return Micropost::whereIn('user_id', $favorite_micropost_ids);
+    //}
 }

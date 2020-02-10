@@ -12,7 +12,7 @@ class MicropostsController extends Controller
         if (\Auth::check()) {
             $user = \Auth::user();
             $microposts = $user->feed_microposts()->orderBy('created_at', 'desc')->paginate(10);
-            $favorites = $user->feed_favorites()->orderBy('created_at', 'desc')->paginate(10);
+            $favorites = $user->favorites()->orderBy('created_at', 'desc')->paginate(10);
 
             $data = [
                 'user' => $user,
