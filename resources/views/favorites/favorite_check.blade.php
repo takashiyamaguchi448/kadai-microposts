@@ -8,6 +8,7 @@
                 </div>
                 <div>
                     <p class="mb-0">{!! nl2br(e($micropost->content)) !!}</p>
+                    @include('favorites.favorite_button', ['microposts' => $microposts])
                 </div>
             </div>
         </li>
